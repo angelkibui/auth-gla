@@ -84,9 +84,8 @@ def token_auth_view(request):
 @authentication_classes([JWTAuthentication])
 @permission_classes([IsAuthenticated])
 def jwt_protected_view(request):
-    # Reporter — Phase 4 challenge answers:
-    # Q1 answer (fields found in the decoded payload):
-    # Q2 answer (what happens when the signature is tampered):
-    # Synthesis answer (JWT revocation challenge and workaround):
+        # Reporter — Phase 1 challenge answers:
+    # Q1 answer (header format for admin:admin123): "username:password" — Base64-encoded
+    # Q2 answer (what happens without credentials): 401 Unauthorized — no Authorization header means DRF cannot authenticate the request, so IsAuthenticated denies access
 
     return Response({"message": "JWT authenticated.", "user": request.user.username})

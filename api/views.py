@@ -87,5 +87,9 @@ def jwt_protected_view(request):
         # Reporter — Phase 1 challenge answers:
     # Q1 answer (header format for admin:admin123): "username:password" — Base64-encoded
     # Q2 answer (what happens without credentials): 401 Unauthorized — no Authorization header means DRF cannot authenticate the request, so IsAuthenticated denies access
-
+    
+        # Reporter — Phase 2 challenge answers:
+    # Q1 answer (effect of deleting the session cookie): Deleting sessionid logs you out immediately —
+    #   the browser no longer sends a session identifier, so Django can't match a request to the
+    #   session record stored server-side, even though that record may still exist in the DB.
     return Response({"message": "JWT authenticated.", "user": request.user.username})

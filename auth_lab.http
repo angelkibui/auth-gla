@@ -21,7 +21,7 @@ Authorization: Basic YWRtaW46YWRtaW4xMjM=
 
 ###
 
-### Phase 1 — Synthesis: Impersonating admin without knowing the password
+### Phase 2 — Synthesis: Impersonating admin without knowing the password
 # An attacker who intercepts "Basic YWRtaW46YWRtaW4xMjM=" off the wire can
 # replay it directly — Base64 is reversible encoding, not encryption, so
 # the string itself IS the credential. No decoding or cracking needed.
@@ -32,10 +32,16 @@ Authorization: Basic YWRtaW46YWRtaW4xMjM=
 ### ═══════════════════════════════════════════════════════════════════════════
 ### PHASE 3 — Token Authentication (Opaque)
 ### ═══════════════════════════════════════════════════════════════════════════
-# TODO: Generate a DRF token for the admin user first (see lab README).
-# TODO: Find the Token Auth endpoint in api/urls.py.
-# TODO: Write a GET request that sends the token using the
-#       Authorization: Token <your-token> header.
+
+### Phase 3 — Opaque Token Auth
+GET http://127.0.0.1:8000/api/token/ HTTP/1.1
+Authorization: Token b40ff22952546789e51799f6af4b9559b6a9a5e7
+
+###
+
+### Phase 3 — Tampered Token
+GET http://127.0.0.1:8000/api/token/ HTTP/1.1
+Authorization: Token b40ff22952546789e51799f6af4b9559b6a9a5e0
 
 
 ### ═══════════════════════════════════════════════════════════════════════════
